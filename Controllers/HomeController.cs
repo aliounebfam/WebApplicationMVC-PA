@@ -7,16 +7,11 @@ using WebApplicationMVC.Utils;
 
 namespace WebApplicationMVC.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController(ILogger<HomeController> logger, DBConnect dbConnection) : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
-        private readonly DBConnect _dbConnection;
+		private readonly ILogger<HomeController> _logger = logger;
+        private readonly DBConnect _dbConnection = dbConnection;
 
-        public HomeController(ILogger<HomeController> logger, DBConnect dbConnection)
-		{
-			_logger = logger;
-            _dbConnection = dbConnection;
-		}
         public IActionResult Index()
         {
 			return View();

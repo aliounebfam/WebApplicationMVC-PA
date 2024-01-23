@@ -34,6 +34,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="filiere">Les Filières</a>
                         </li>
                         <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Classe" asp-action="index">Classes</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li> 
                     </ul>
@@ -84,6 +87,24 @@
                 </div>
             </div>
 
+            <!-- Modal Suppression -->
+            @if (!string.IsNullOrEmpty(ViewBag.SuppressionMessage))
+            {
+                <div class="modal" id="suppressionModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body fw-medium fs-5">
+                                @ViewBag.SuppressionMessage
+                            </div>
+                            <div class="modal-footer">
+                                <button id="fermerModalSuppression" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
             @RenderBody()
         </main>
     </div>
@@ -109,8 +130,21 @@
                 connectionDBModal.show();
                 sessionStorage.setItem('isModalShowed', 'true');
             }
+        }  
+    </script>
+
+    <script>
+        if ('@ViewBag.SuppressionMessage' !== '') {
+            // Affichez le modal de suppression de la classe
+            var testModal = new bootstrap.Modal(document.getElementById('suppressionModal'));
+            testModal.show();
+
+            // Ajoutez un événement de clic au bouton "Fermer"
+            document.getElementById('fermerModalSuppression').addEventListener('click', function () {
+                // Redirigez vers l'action "Index" du contrôleur "Classe"
+                window.location.href = '@Url.Action("Index", "Classe")';
+            });
         }
-             
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
