@@ -1,0 +1,35 @@
+﻿@using MySql.Data.MySqlClient;
+@using WebApplicationMVC.Utils;
+
+@{
+    Layout = "_Layout";
+    ViewBag.ConnectionInfo = GetConnectionInfo();
+}
+
+@functions {
+    private Dictionary<string, object> GetConnectionInfo()
+    {
+        IServiceProvider serviceProvider = Context.RequestServices;
+        DBConnect dbConnection = serviceProvider.GetRequiredService<DBConnect>();
+
+        try
+        {
+            using (MySqlConnection mysqldbConnection = dbConnection.CreateConnection())
+            {
+                return new Dictionary<string, object>
+                {
+                    { "isConnectionOk", true },
+                    { "messageConnection", $"Vous êtes correctement connecté(e) à la base de données '{mysqldbConnection.Database}'" }
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            return new Dictionary<string, object>
+            {
+                { "isConnectionOk", false },
+                { "messageConnection", $"Une erreur s'est produite : {ex.Message}" }
+            };
+        }
+    }
+}
