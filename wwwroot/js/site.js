@@ -3,9 +3,24 @@
 
 // Write your JavaScript code.
 
-const addServiceModalBtn = document.getElementById('addServiceModalBtn');
+// Sélectionne tous les boutons avec la classe "addServiceModalBtn"
+const addServiceModalBtns = document.querySelectorAll('.addServiceModalBtn');
 
-addServiceModalBtn.addEventListener('click', () => {
-    const addServiceModal = new bootstrap.Modal('#addServiceModal');
-    addServiceModal.show();
+addServiceModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const addServiceModal = new bootstrap.Modal('#addServiceModal');
+        addServiceModal.show();
+    });
+});
+
+
+
+// Sélectionne tous les boutons avec la classe "addDepartementModalBtn"
+const addDepartementModalBtns = document.querySelectorAll('.addDepartementModalBtn');
+
+addDepartementModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const addDepartementModal = new bootstrap.Modal('#addDepartementModal');
+        addDepartementModal.show();
+    });
 });

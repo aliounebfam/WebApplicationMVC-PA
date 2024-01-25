@@ -28,13 +28,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Departement">Départements</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Service" asp-action="index">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Departement" asp-action="Index">Départements</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="filiere">Les Filières</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Service" asp-action="index">Services</a>
                         </li>
                         <li class="ms-2 nav-item d-flex align-items-center">
                             <div class="dropdown">
@@ -42,11 +42,11 @@
                                     Ajouter
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="btn dropdown-item" id="addServiceModalBtn">Ajouter Service</a></li>
-                                    <li><a class="btn dropdown-item" id="addDepartementModalBtn">Ajouter Département</a></li>
-                                    <li><a class="btn dropdown-item" id="addFiliereModalBtn">Ajouter Filière</a></li>
-                                    <li><a class="btn dropdown-item" id="addPerModalBtn">Ajouter PER</a></li>
-                                    <li><a class="btn dropdown-item" id="addVacataireModalBtn">Ajouter Vacataire</a></li>
+                                    <li><a class="btn dropdown-item addServiceModalBtn">Ajouter Service</a></li>
+                                    <li><a class="btn dropdown-item addDepartementModalBtn">Ajouter Département</a></li>
+                                    <li><a class="btn dropdown-item addFiliereModalBtn">Ajouter Filière</a></li>
+                                    <li><a class="btn dropdown-item addPerModalBtn">Ajouter PER</a></li>
+                                    <li><a class="btn dropdown-item addVacataireModalBtn">Ajouter Vacataire</a></li>
                                 </ul>
                             </div>
                         </li> 
@@ -127,6 +127,36 @@
             </div>
             <!-- Fin Modal Ajout Service -->
 
+            <!-- Début Modal Ajout Département -->
+            <div class="modal fade" id="addDepartementModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addDepartementModalLabel">Ajouter un département</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addDepartementForm" asp-controller="Departement" asp-action="Ajout" method="post">
+                                <div class="mb-3">
+                                    <label for="code" class="col-form-label">Code du département :</label>
+                                    <input type="number" class="form-control" id="code" name="code" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nom" class="col-form-label">Nom du département :</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer le modal</button>
+                            <button type="submit" form="addDepartementForm" class="btn btn-primary">Ajouter le département</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal Ajout Departement -->
+
+
             <!-- Modal Information après avoir effectué une action -->
             @if (!string.IsNullOrEmpty(ViewBag.modalMessage))
             {
@@ -197,7 +227,7 @@
             // Ajoutez un événement de clic au bouton "fermerModalInformation"
             informationModalDom.addEventListener('hidden.bs.modal', function (event) {
 
-                const redirectController = window.location.pathname.split('/')[0] || "Service";
+                const redirectController = window.location.pathname.split('/')[1] || "Service";
                 window.location.href = '@Url.Action("Index", "")' + redirectController;
             });
         }

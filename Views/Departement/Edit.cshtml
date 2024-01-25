@@ -1,30 +1,24 @@
-﻿@model WebApplicationMVC.Models.ServiceModel
+﻿@model WebApplicationMVC.Models.DepartementModel
 
 @{
-    ViewData["Title"] = "Editer Service";
+    ViewData["Title"] = "Editer Département";
 }
 
-<h2>Edition du service "<em>@Model.nom</em>"</h2>
+<h2>Edition du département "<em>@Model.nom</em>"</h2>
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group mb-4">
-        <label asp-for="id" class="control-label">ID</label>
-        <input asp-for="id" class="form-control" readonly />
-        <span asp-validation-for="id" class="text-danger"></span>
+        <label asp-for="code" class="control-label">Code</label>
+        <input asp-for="code" class="form-control" readonly />
+        <span asp-validation-for="code" class="text-danger"></span>
     </div>
 
     <div class="form-group mb-4">
         <label asp-for="nom" class="control-label">Nom</label>
         <input asp-for="nom" class="form-control" />
         <span asp-validation-for="nom" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mb-3">
-        <label asp-for="description" class="control-label">Description</label>
-        <textarea asp-for="description" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="description" class="text-danger"></span>
     </div>
 
     <div class="form-group d-flex justify-content-end">
@@ -38,6 +32,6 @@
             <path d="M5 9h11a4 4 0 1 1 0 8h-1"></path>
             <path d="M9 13 5 9l4-4"></path>
         </svg>
-        Retour à la liste des services
-        </a>
+        Retour à la liste des départements
+    </a>
 </div>
