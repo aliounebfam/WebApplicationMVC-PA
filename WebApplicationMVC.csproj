@@ -8,13 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="NewFolder\**" />
+    <Compile Remove="Views\NewFolder\**" />
     <Content Remove="NewFolder\**" />
+    <Content Remove="Views\NewFolder\**" />
     <EmbeddedResource Remove="NewFolder\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
     <None Remove="NewFolder\**" />
+    <None Remove="Views\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Classe\Index.cshtml" />
+    <Content Remove="Views\Service\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,19 +34,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\NewFolder\" />
+    <UpToDateCheckInput Remove="Views\Service\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Classe\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Service\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Classe\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Classe\Index.cshtml" />
+    <None Include="Views\Service\Index.cshtml" />
   </ItemGroup>
 
 </Project>

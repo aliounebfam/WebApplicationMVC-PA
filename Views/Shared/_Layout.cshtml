@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=5.0" />
-    <title>@ViewData["Title"] - WebApplicationMVC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UFR SET </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplicationMVC.styles.css" asp-append-version="true" />
@@ -16,8 +16,8 @@
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplicationMVC</a>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">UFR SET</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Departement">Départements</a>
@@ -34,10 +34,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="filiere">Les Filières</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Classe" asp-action="index">Classes</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Service" asp-action="index">Services</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="ms-2 nav-item d-flex align-items-center">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ajouter
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="btn dropdown-item" id="addServiceModalBtn">Ajouter Service</a></li>
+                                    <li><a class="btn dropdown-item" id="addDepartementModalBtn">Ajouter Département</a></li>
+                                    <li><a class="btn dropdown-item" id="addFiliereModalBtn">Ajouter Filière</a></li>
+                                    <li><a class="btn dropdown-item" id="addPerModalBtn">Ajouter PER</a></li>
+                                    <li><a class="btn dropdown-item" id="addVacataireModalBtn">Ajouter Vacataire</a></li>
+                                </ul>
+                            </div>
                         </li> 
                     </ul>
 
@@ -65,7 +76,7 @@
         <main role="main" class="pb-3">
 
             <!-- Modal Connection DB-->
-            <div class="modal text-center" tabindex="-1" id="myModal">
+            <div class="modal fade text-center" tabindex="-1" id="connectionDBModal">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-body fw-medium fs-5">
@@ -87,17 +98,46 @@
                 </div>
             </div>
 
-            <!-- Modal Suppression -->
-            @if (!string.IsNullOrEmpty(ViewBag.SuppressionMessage))
+            <!-- Début Modal Ajout Service -->
+            <div class="modal fade" id="addServiceModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addServiceModalLabel">Ajouter un service</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addServiceForm" asp-controller="Service" asp-action="Ajout" method="post">
+                                <div class="mb-3">
+                                    <label for="nom" class="col-form-label">Nom du service :</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="col-form-label">Description du service :</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer le modal</button>
+                            <button type="submit" form="addServiceForm" class="btn btn-primary">Ajouter le service</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal Ajout Service -->
+
+            <!-- Modal Information après avoir effectué une action -->
+            @if (!string.IsNullOrEmpty(ViewBag.modalMessage))
             {
-                <div class="modal" id="suppressionModal" tabindex="-1">
+                <div class="modal text-center" id="informationModal" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body fw-medium fs-5">
-                                @ViewBag.SuppressionMessage
+                                @ViewBag.modalMessage
                             </div>
                             <div class="modal-footer">
-                                <button id="fermerModalSuppression" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                <button id="fermerModalInformation" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                             </div>
                         </div>
                     </div>
@@ -109,9 +149,25 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer fs-6" style="
+            position: absolute;
+            color: #2e4b6e;
+            width: 100%;
+            padding: 10px;
+            bottom: 0;">
         <div class="container">
-            &copy; 2024 - WebApplicationMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - UFR SET || built with ❤️ by 
+            <a href="https://www.linkedin.com/in/aliounebfam" target="_blank" title="Compte Linkedin Alioune Badara FAM">
+                <span class="d-inline-flex align-items-center">
+                Alioune Badara FAM (ABF)
+                <svg width="17" height="17" fill="none" stroke="#2e4b6e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M11 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-5"></path>
+                    <path d="M10 14 20 4"></path>
+                    <path d="M15 4h5v5"></path>
+                </svg>
+                </span>
+            </a>
+            
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -120,11 +176,9 @@
 
     <script>
         let isModalShowed = sessionStorage.getItem('isModalShowed') === 'true';
-
-        const myModal = document.getElementById('myModal')
        
-        if (myModal != null) {
-           const connectionDBModal = new bootstrap.Modal(document.getElementById('myModal'));
+        if (document.getElementById('connectionDBModal') != null) {
+            const connectionDBModal = new bootstrap.Modal("#connectionDBModal");
 
             if (!isModalShowed) {
                 connectionDBModal.show();
@@ -134,15 +188,17 @@
     </script>
 
     <script>
-        if ('@ViewBag.SuppressionMessage' !== '') {
-            // Affichez le modal de suppression de la classe
-            var testModal = new bootstrap.Modal(document.getElementById('suppressionModal'));
-            testModal.show();
+        if ('@ViewBag.modalMessage' !== '') {
+            // Affichage du modal d'information après une action
+            const informationModalDom = document.getElementById('informationModal');
+            const informationModal = new bootstrap.Modal(informationModalDom);
+            informationModal.show();
 
-            // Ajoutez un événement de clic au bouton "Fermer"
-            document.getElementById('fermerModalSuppression').addEventListener('click', function () {
-                // Redirigez vers l'action "Index" du contrôleur "Classe"
-                window.location.href = '@Url.Action("Index", "Classe")';
+            // Ajoutez un événement de clic au bouton "fermerModalInformation"
+            informationModalDom.addEventListener('hidden.bs.modal', function (event) {
+
+                const redirectController = window.location.pathname.split('/')[0] || "Service";
+                window.location.href = '@Url.Action("Index", "")' + redirectController;
             });
         }
     </script>

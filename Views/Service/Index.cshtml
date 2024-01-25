@@ -1,0 +1,45 @@
+﻿@model List<WebApplicationMVC.Models.ServiceModel>
+@{
+    ViewData["Title"] = "Service";
+}
+
+<div class="d-flex gap-4 justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Liste des @ViewData["Title"]s de l'UFR SET</h3>
+    <button type="button" class="btn btn-primary d-flex align-items-center gap-1" id="addServiceModalBtn">
+
+        <svg width="20" height="20" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+        </svg>
+    Ajouter un Service
+</button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>Id</th> *@
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                @* <td>@service.id</td> *@
+                <td>@service.nom</td>
+                <td>@service.description</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info">Détails</button>
+                        <a href="@Url.Action("Edit", new { id = service.id})" class="btn btn-warning">Modifier</a>
+                        @* <button type="button" class="btn btn-warning">Modifier</button> *@
+                        <a href="@Url.Action("Delete", new { id = service.id})" class="btn btn-danger">Supprimer</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
