@@ -2,7 +2,8 @@
 {
     public class DepartementModel
     {
-        public int code { get; set; }
-        public string nom { get; set; }
+        public required int code { get; set; }
+        public required string nom { get; set; }
+        public List<FiliereModel>? Filieres { get; set; }
     }
 }

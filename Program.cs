@@ -1,9 +1,14 @@
+using WebApplicationMVC.Controllers;
 using WebApplicationMVC.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Ajout service DBConnect
 builder.Services.AddSingleton<DBConnect>();
+// Ajoutez le service DepartementController à l'injection de dépendances
+builder.Services.AddSingleton<DepartementController>();
+
+builder.Services.AddSingleton<FiliereController>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();

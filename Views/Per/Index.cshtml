@@ -1,0 +1,46 @@
+﻿@model List<WebApplicationMVC.Models.PerModel>
+@{
+    ViewData["Title"] = "PER";
+}
+
+<div class="d-flex gap-4 justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Liste des @ViewData["Title"]s</h3>
+    <button type="button" class="btn btn-primary d-flex align-items-center gap-1 addPerModalBtn">
+        <svg width="20" height="20" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+        </svg>
+        Ajouter un PER
+    </button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Spécialité</th>
+            <th>Code Filière</th>
+            <th>Filière</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var per in Model)
+        {
+            <tr>
+                <td>@per.Id</td>
+                <td>@per.Nom</td>
+                <td>@per.Specialite</td>
+                <td>@per.CodeFiliere</td>
+                <td>@(per.Filiere != null ? per.Filiere.Nom : "")</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a href="@Url.Action("Edit", new { id = per.Id })" class="btn btn-warning">Modifier</a>
+                        <a href="@Url.Action("Delete", new { id = per.Id })" class="btn btn-danger">Supprimer</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

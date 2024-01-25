@@ -10,7 +10,7 @@ namespace WebApplicationMVC.Controllers
         private readonly DBConnect _dbConnection = dbConnection;
 
 
-        private List<DepartementModel> GetDepartementsFromDatabase()
+        public List<DepartementModel> GetDepartementsFromDatabase()
         {
             List<DepartementModel> departements = [];
 
@@ -41,7 +41,7 @@ namespace WebApplicationMVC.Controllers
         }
 
 
-        private DepartementModel? GetDepartementByCode(int code)
+        public DepartementModel? GetDepartementByCode(int code)
         {
             using MySqlConnection mysqldbConnection = _dbConnection.CreateConnection();
             MySqlCommand sqlCommand = new("SELECT * FROM departements WHERE code = @code", mysqldbConnection);
@@ -66,8 +66,6 @@ namespace WebApplicationMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Ajout(DepartementModel model)
         {
-            /*if (ModelState.IsValid)
-            {*/
             try
             {
                 using (MySqlConnection mysqldbConnection = _dbConnection.CreateConnection())

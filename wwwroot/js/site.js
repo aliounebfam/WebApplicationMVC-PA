@@ -24,3 +24,33 @@ addDepartementModalBtns.forEach(btn => {
         addDepartementModal.show();
     });
 });
+
+// Sélectionne tous les boutons avec la classe "addFiliereModalBtn"
+const addFiliereModalBtns = document.querySelectorAll('.addFiliereModalBtn');
+
+addFiliereModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const addFiliereModal = new bootstrap.Modal('#addFiliereModal');
+        addFiliereModal.show();
+    });
+});
+
+
+const addPerModalBtns = document.querySelectorAll('.addPerModalBtn');
+
+addPerModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const addPerModal = new bootstrap.Modal('#addPerModal');
+        addPerModal.show();
+    });
+});
+
+
+const addVacataireModalBtns = document.querySelectorAll('.addVacataireModalBtn');
+
+addVacataireModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const addVacataireModal = new bootstrap.Modal('#addVacataireModal');
+        addVacataireModal.show();
+    });
+});

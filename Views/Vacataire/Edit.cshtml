@@ -1,0 +1,48 @@
+﻿<!-- Edit.cshtml -->
+@model WebApplicationMVC.Models.VacataireModel
+@{
+    ViewData["Title"] = "Édition d'un Vacataire";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-4">
+        <label asp-for="Nom" class="control-label"></label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="Specialite" class="control-label"></label>
+        <input asp-for="Specialite" class="form-control" />
+        <span asp-validation-for="Specialite" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="SelectedFiliereCode" class="control-label">Filière</label>
+        <select asp-for="SelectedFiliereCode" asp-items="@(new SelectList(Model.Filieres, "Code", "Nom"))" class="form-control">
+            <option value="">Sélectionnez une filière</option>
+        </select>
+        <span asp-validation-for="SelectedFiliereCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex gap-3 justify-content-end">
+        <input type="submit" value="Enregistrer" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+    </div>
+</form>
+
+<div class="fs-5">
+    <a class="d-inline-flex align-items-center gap-1" asp-action="Index">
+        <svg width="20" height="20" fill="none" stroke="#2e4b6e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 9h11a4 4 0 1 1 0 8h-1"></path>
+            <path d="M9 13 5 9l4-4"></path>
+        </svg>
+        Retour à la liste des Vacataires
+    </a>
+</div>

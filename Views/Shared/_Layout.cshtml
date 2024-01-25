@@ -34,7 +34,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Departement" asp-action="Index">Départements</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="filiere">Les Filières</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Filiere" asp-action="Index">Filières</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Per" asp-action="Index">PERs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vacataire" asp-action="Index">Vacataires</a>
                         </li>
                         <li class="ms-2 nav-item d-flex align-items-center">
                             <div class="dropdown">
@@ -155,6 +161,91 @@
                 </div>
             </div>
             <!-- Fin Modal Ajout Departement -->
+
+            <!-- Début Modal Ajout Filiere -->
+            <div class="modal fade" id="addFiliereModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addFiliereModalLabel">Ajouter une filière</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addFiliereForm" asp-controller="Filiere" asp-action="Ajout" method="post">
+                                <div class="mb-3">
+                                    <label for="code" class="col-form-label">Code de la filière :</label>
+                                    <input type="number" class="form-control" id="code" name="code" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nom" class="col-form-label">Nom de la filière :</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer le modal</button>
+                            <button type="submit" form="addFiliereForm" class="btn btn-primary">Ajouter la filière</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal Ajout Filiere -->
+            <!-- Début Modal Ajout Per -->
+            <div class="modal fade" id="addPerModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addPerModalLabel">Ajouter un PER</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addPerForm" asp-controller="Per" asp-action="Ajout" method="post">
+                                <div class="mb-3">
+                                    <label for="code" class="col-form-label">Code du PER :</label>
+                                    <input type="number" class="form-control" id="code" name="code" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nom" class="col-form-label">Nom du PER :</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer le modal</button>
+                            <button type="submit" form="addPerForm" class="btn btn-primary">Ajouter le PER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal Ajout Per -->
+            <!-- Début Modal Ajout Vacataire -->
+            <div class="modal fade" id="addVacataireModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addVacataireModalLabel">Ajouter un Vacataire</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addVacataireForm" asp-controller="Vacataire" asp-action="Ajout" method="post">
+                                <div class="mb-3">
+                                    <label for="code" class="col-form-label">Code du Vacataire :</label>
+                                    <input type="number" class="form-control" id="code" name="code" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nom" class="col-form-label">Nom du Vacataire :</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer le modal</button>
+                            <button type="submit" form="addVacataireForm" class="btn btn-primary">Ajouter le Vacataire</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal Ajout Vacataire -->
 
 
             <!-- Modal Information après avoir effectué une action -->
